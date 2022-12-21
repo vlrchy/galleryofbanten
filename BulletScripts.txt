@@ -1,0 +1,167 @@
+CUSTOM
+
+<UTB Initial Code>
+this.window.height = 400;
+this.window.y -= 250;
+</UTB Initial Code>
+
+<UTB Initial Code>
+player.x = this.window.x_middle ;
+player.y = this.window.y_middle;
+</UTB Initial Code>
+
+
+[Bullet follows player]
+
+<Use Undertale Attack>
+
+<UTB Duration: 300>
+
+<UTB Code>
+if(f % 30 === 0) {
+  this.createAttack(Math.randomInt(4) + 1);
+}
+</UTB Code>
+
+============================================================
+
+<UTB Attack 1>
+Initial X: 0
+Initial Y: this._player.y
+Spawn Rate: -1
+X Speed: 4
+Y Speed: 0
+Image: Sprinkle-horz
+Collision Type: Rect
+Height: 12
+</UTB Attack 1>
+
+<UTB Attack 2>
+Initial X: Graphics.boxWidth
+Initial Y: this._player.y
+Spawn Rate: -1
+X Speed: -4
+Y Speed: 0
+Image: Sprinkle-horz
+Collision Type: Rect
+Height: 12
+</UTB Attack 2>
+
+<UTB Attack 3>
+Initial X: this._player.x
+Initial Y: 0
+Spawn Rate: -1
+X Speed: 0
+Y Speed: 4
+Image: Sprinkle-vert
+Collision Type: Rect
+Width: 12
+</UTB Attack 3>
+
+<UTB Attack 4>
+Initial X: this._player.x
+Initial Y: Graphics.boxHeight
+Spawn Rate: -1
+X Speed: 0
+Y Speed: -4
+Image: Sprinkle-vert
+Collision Type: Rect
+Width: 12
+</UTB Attack 4>
+
+XXX
+
+[spoingy]
+
+<Use Undertale Attack>
+
+<UTB Duration: 600>
+
+<UTB Code>
+if(f % 20 === 0) {
+  this.createAttack(Math.randomInt(2) + 1);
+}
+</UTB Code>
+
+<UTB Initial Code>
+this.window.height = 500;
+this.window.y -= 300;
+</UTB Initial Code>
+
+============================================================
+
+<UTB Attack 1>
+Initial X: this.window.x
+Initial Y: this.window.top
+Spawn Rate: -1
+X Speed: 4
+Y Speed: 0
+X Accel: (Math.random() < 0.5) ? -0.1 : 0.1
+Y Accel: 0.1
+Image: Sprinkle-horz
+Collision Type: Pixel
+Height: 12
+</UTB Attack 1>
+
+<UTB Attack 2>
+Initial X: this.window.right
+Initial Y: this.window.top
+Spawn Rate: -1
+X Speed: -4
+Y Speed: 0
+X Accel: (Math.random() < 0.5) ? -0.1 : 0.1
+Y Accel: 0.1
+Image: Sprinkle-horz
+Collision Type: Rect
+Height: 12
+</UTB Attack 2>
+
+XXX
+
+Rain
+
+<Use Undertale Attack>
+
+<UTB Duration: 300>
+
+<UTB Code>
+if(f === 2) {
+  this.message("Hello! This is message!");
+}
+</UTB Code>
+
+<UTB Initial Code>
+this.window.height = 400;
+this.window.y -= 250;
+</UTB Initial Code>
+
+============================================================
+<UTB Attack 1>
+Initial X: window.left+10
+Initial Y: window.top 
+X Speed: 1
+Y Speed: 0
+X Accel: 0
+Y Accel: 4
+Collision Type: rect
+Width: 15
+Height: 15
+Image: Sprinkle-vert
+Spawn Rate: 60
+Spawn Delay: 0
+</UTB Attack 1>
+
+<UTB Attack 2>
+Initial X: window.left+30
+Initial Y: window.top 
+X Speed: 1
+Y Speed: 0
+X Accel: 0
+Y Accel: 3
+Collision Type: rect
+Width: 15
+Height: 15
+Image: Sprinkle-vert
+Spawn Rate: 120
+Spawn Delay: 0
+</UTB Attack 2>

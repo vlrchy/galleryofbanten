@@ -1,0 +1,393 @@
+{
+    "library": {
+        "categories": [
+            "Culinary",
+            "Nature",
+            "Baduy",
+            "Weapon",
+			"Arts",
+			"History",
+            "Lorem Ipsum",
+            "Changelog"
+        ],
+        "books": {
+            "Introduction": {
+                "title": "Introduction",
+                "titleColor": 1,
+                "text": "WARNING: This plugin requires RPG Maker MV 1.5.0 \nor above! Please make sure your RPG Maker MV \nsoftware is up to date before using this plugin.\n\n--------------------------------------------------\n\nWhen we create a game, we usually create a whole \nnew world rich in lore and details, and want to \nmake it all available to the players, so that they \ncan understand every single detail we develop. \nHowever, just dumping it all in lengthy dialogues \nusually bore and scare most of the players, who \nwill simply give up on your world.\n\nA common alternative used by many AAA games is to \nminimize dialogue and exposition, and provide \nadditional details through in-game books.\n\nThis plugin aims to provide just that for your \ngame: a book menu where the player can read up \nadditional lore when he feels up to it. You can \nplace books throughout your game, providing a bit \nmore of context for hungry players as they \nprogress, and keeping exposition to a minimum.",
+                "category": 0,
+                "id": 0
+            },
+            "DifferentScenes": {
+                "title": "Different Scenes",
+                "titleColor": 8,
+                "text": "This plugin provides two different types of \nscenes.\n\nThe first one is a detached book window, that \nshows only one book at a time (title and book \ncontents). It is a simpler version meant to be \nused when the player finds a new book while \nexploring your world. You can set it up so that \nthe book will then be made available in the menu \nso that the player can read it anytime he wants, \nor not.\n\nThe second scene is kind of a \"player library\". \nIt is meant to be accessed from the main menu \nand list all books known to the player (you can \nset it up to show all books EVER, or only those \nthe player has found while exploring).",
+                "category": 0,
+                "id": 1
+            },
+            "BackgroundImages": {
+                "title": "Background Images",
+                "text": "The plugin gives a lot of options for you to \nsetup background images on both scenes. \nConfigurations are kept separate for each one, \nso you can set different backgrounds for each \nscene if you wish.\n\nAll images must be in png format and located \nin the img/pictures folder. The parameters to \nconfig each type of background image is shared \nby all possible options.\n\nA warning though, the plugin won't manipulate, \nstretch or shrink images. It will only place \nthe images as they are. It's up to you to \nprovide images on the right size.\n\nApart from choosing the images, you must also \ninform the plugin how you want it to present \nthem. Options are a little different between \nscenes because the Menu Scene has an additional \nwindow (the list window), but the logic is the \nsame. Here's a few things you should know:\n - If you set it up as \"None\", the plugin will \n paint a black background, with no image;\n - If you set \"Default Map Print\", it will keep \n the base class default, which is using a print \n screen from the map the player is located;\n - If you set \"Full Background Image\", the image \n will be place as a background for the whole \n screen, regardless of the size of your windows;\n - There's a bunch of options saying \"Multiple \n Images\", and then a combo highlighted between \n parenthesis, like \"Title + Text\", \"Title / Text \n + List\", for example. The dash sign (/) means \n the windows will share a single image, while \n the plus sign (+) means it will use a different \n image;\n - The option \"Single Image\" will set the same \n image across all windows in the scene. If the \n scene takes the whole screen, it will work \n exactly as the \"Full Background Image\". If not, \n it will be placed as best as possible to cover \n all windows on the scene, and nothing more;\n - There are also options to allow you to combine \n different configurations, so you can customize \n the background to your liking!",
+                "category": 0,
+                "id": 2
+            },
+            "CustomBackgrounds": {
+                "title": "Custom Backgrounds",
+                "text": "IMPORTANT: All images will be loaded from the \nimg/pictures folder, and they must be in png \nformat.\n\nYou can setup custom backgrounds for individual \nbooks, so that it will override the global \nbackground configurations. You may set it to \nshow on the detached window or menu window \nseparately, or on both, and you can define if it \nwill cover the text window only or both text and \ntitle windows. You can't setup different \nbackgrounds for each scene though, for ease of \nuse.\n\nWhile using the Plugin Manager to load books, \njust set the \"Custom Background\" parameter of a \nbooks to select an image, and the \"Custom \nBackground Mode\" to set the custom background \nbehavior. Leave \"Custom Background\" empty if you\ndon't want a custom image to be displayed.\n\nIf using a JSON file as datasource, just add a \n\"customBg\" tag to specify the file name and a \ncustomBgMode to define the custom background \nbehavior. The customBgMode tag must be an integer, \nas follows:\n - 5: Detached Text Window Only\n - 6: Menu Text Window Only\n - 7: All Text Window Only\n - 9: Detached Title + Text Window\n - 10: Menu Title + Text Window\n - 11: All Title + Text Window\nJust to clarify, this code is read bitwise by \nthe plugin. That's why it is not sequential. \nBits are read as follows:\n - 1 (least significant bit): Affects the \ndetached window\n - 2 (second least significant bit): Affects the \nmenu window\n - 4 (second most significant bit): Affects the \ntext window\n - 8 (most significant bit): Affects both text \nand title window\n\nDo not include the custom background tags in \nyour JSON file if you don't want to use a custom \nimage for the book, or leave \"customBg\" as an \nempty string.",
+                "category": 0,
+                "customBg": "Sword",
+                "customBgMode": 7
+            },
+            "InlineImages": {
+                "title": "Inline Images",
+                "text": "The escape code % img(\"filename\") (no espace \nbetween % and img) can be used to include an \nimage along with the book text in its original \nsize (or resized to fit into window, see next \nsection). The plugin will always look for images\nin PNG format in the pictures folder.\n\nEx.: % img(\"Sword\")\n%img(\"Sword\")\nYou can also include optional parameters to \nforce the plugin to resize the image to your \nliking: % img(\"filename\", width, height) \n(again, no space between % and img). The code \nparameters width and height are percentile \nnumbers. For instance, if you want the image to \nbe displayed in half its original size use \n% img(\"filename\", 50, 50).\nEx.: % img(\"Sword\", 50, 50)\n%img(\"Sword\", 50, 50)\n\nEx.: % img(\"Sword\", 40, 20)\n%img(\"Sword\", 40, 20)\nOne additional note: images are loaded into \nmemory asynchronously. Which means the plugin \nwon't wait for it to be ready to show the book's \ntext. If, however, the image finishes loading \nand the screen is already showing your book's \ntext it will be automatically updated. In other \nwords, slower machines may see the book load \nwithout the image, just to see the screen \nautomatically update a few seconds later \nincluding it.\n\n\nWARNING: If you're using a plugin to provide \nwordwrapping functions, you'll need to manually \ninclude the wordwrap tag before any text that \nfollows an inline image. It is required because \nto include such images this plugin needs to \nbreak down the book text in sections, and the \nwordwrap tag included in the \"Book Text Format\" \nparameter or at the start of the first block of\ntext won't have effect on any text following the \nimage.\nEx.: < WordWrap>Before an inline image.\n% img(\"Sword\")< WordWrap>After any image.",
+                "category": 0
+            },
+            "InlineTrailingImages": {
+                "title": "Inline Trailing Images",
+                "text": "%in_img(\"alphabet-2010703_960_720\", 10, 10)ou can insert small images at the start of \nparagraphs using the escape code \n% in_img(\"filename\") (no space between % and \nin_img). The same resizing parameters as % img \ncan be used here: % in_img(\"filename\", 50, 50).\nThe image will always be aligned to the left \nof the screen, and any following text will be \ndisplayed right next to it (at the same height \nas the bottom of the image).",
+                "category": 0
+            },
+            "BoluTape": {
+                "title": "Bolu Tape",
+                "text": "Banten's local delicacy. It's a kind of sponge cake, \nand has a light, soft texture.",
+                "category": 0
+            },
+            "Ceplis": {
+                "title": "Ceplis",
+                "text": "Ceplis is a crispy snack from Banten, made from \nmelinjo. It has a bitter aftertaste, but people used \nto add a variety of seasonings. It's small, shaped \nlike buttons, and thick.",
+                "category": 0
+            },
+            "Gipang": {
+                "title": "Gipang",
+                "text": "Banten's traditional sweet snack, made from rice or \nglutinous rice, mixed with sugar. There's a ]nvariety that has a layer of peanuts and brown sugar on top.",
+                "category": 0
+            },
+            "KetanBintul": {
+                "title": "Ketan Bintul",
+                "text": "A delicacy that's recognized as one of Banten's \nlocal Ramadhan food. It's made of sticky rice and topped \nwith serundeng. It's better served with curry or \nmeat stew.",
+                "category": 0
+            },
+            "SateBandeng": {
+                "title": "Sate Bandeng",
+                "text": "Skewered and deboned bandeng. It has a fragrant \naroma and the taste is sweet and savory, with \na touch of smokiness.",
+                "category": 0
+            },
+            "RabegMeat": {
+                "title": "Rabeg Meat",
+                "text": "Rabeg was originally made of goat meat, but as \ntime goes, people cook it with various types of meat.",
+                "category": 0
+            },
+            "Rabeg": {
+                "title": "Rabeg",
+                "text": "A delicacy of Banten that has the distinct flavors \nof Middle Eastern spices.",
+                "category": 0
+            },
+            "PulauUmang": {
+                "title": "Pulau Umang",
+                "text": "A popular resort area in Banten.",
+                "category": 1
+            },
+            "TNUK": {
+                "title": "Taman Nasional",
+                "text": "A national park in Pandeglang. It was supposedly \nwiped off by a Krakatau eruption once, but then \ndeveloped as a result of its fertile soil.",
+                "category": 1
+            },
+            "TNUKAnimals": {
+                "title": "Hewan Endemik",
+                "text": "Taman Nasional Ujung Kulon hosts Badak Jawa, \nOwa Jawa, Surili, and anjing hutan, which are native \nto the area.",
+                "category": 1
+            },
+            "BadakJawa": {
+                "title": "Badak Jawa",
+                "text": "Badak Jawa naturally inhabits Ujung Kulon.",
+                "category": 1
+            },
+            "Surili": {
+                "title": "Surili",
+                "text": "Surilis are called leaf monkeys, because aside from \nfruits, they also eat leaves.",
+                "category": 1
+            },
+            "Baduy": {
+                "title": "Suku Baduy",
+                "text": "Suku Baduy or Kanekes is an ethnic group native \nto the southeastern part of Banten, more specifically, \nLebak.",
+                "category": 2
+            },
+            "Baduy2": {
+                "title": "Kepercayaan",
+                "text": "Suku Baduy upholds their traditional customs, but \nthe rules and taboos between Baduy Luar and \nBaduy Dalam differs.",
+                "category": 2 
+			},
+			"GolokCiomas": {
+                "title": "Golok Ciomas",
+                "text": "This weapon is commonly made using sulakar steel. \nPeople of Banten used to have it as their \nweapon during wars.",
+                "category": 3 
+			},
+			"GolokP": {
+                "title": "Golok Ciomas - Power",
+                "text": "Golok Ciomas is known for its mystical powers, but \nit's also feared because of the poison at its \ncore.",
+                "category": 3
+            },            
+            "DebusN": {
+                "title": "Debus - Origin of Name",
+                "text": "The name debus originated from an arabic word, \nmeaning Sharp Weapon.",
+                "category": 4
+            },            
+			"DebusP": {
+                "title": "Debus Performance",
+                "text": "Debus perfomances doesn't only consist of dangerous \nacts, but also dances and musical arts.",
+                "category": 4
+            },            
+			"DebusP2": {
+                "title": "Debus Performance - Acts",
+                "text": "Debus performances typically start with Gembung, \nand ends with Gemrung.",
+                "category": 4
+            },
+			"Kaibon": {
+                "title": "Keraton Kaibon",
+                "text": "Keraton Kaibon, Kaibon meaning 'motherly', was a \npalace resided by Queen Asiyah.",
+                "category": 5
+            },
+			"SultanHasanuddin": {
+                "title": "Sultan",
+                "text": "Sultan Hasanuddin was Banten's first sultan.",
+                "category": 5
+            },
+			"MeriamKiAmuk": {
+                "title": "Keraton Kaibon",
+                "text": "Meriam Ki Amuk was a present for Sultan Hasanuddin \nduring the 16th century, brought all the way \nfrom West Java.",
+                "category": 5
+            },
+			"MeriamSiJagur": {
+                "title": "Keraton Kaibon",
+                "text": "Meriam Si Jagur is Meriam Ki Amuk's counterpart, and \nit's installed at Museum Fatahillah.",
+                "category": 5
+			},
+            "DetachedText": {
+                "title": "Detached Text",
+                "text": "This one configures the detached text window \nscene, where the book contents are displayed. \nMost of the options here are used to control \nthe window aspect.\n\nThere's one, however, that can be used to \ncustomize the text display:\n\n Book Text Format\n  - This defines how the book text is shown to\n  the players. You can use text codes to\n  customize the window as you wish, and use\n  this placeholders to set up book data:\n    - %1 will reference the book title (should\n you wish to hide the title bar)\n    - %2 will reference the book category\n    - %3 will reference the book text\nI highly recommend using Yanfly's Message Core \nplugin, or any other that provides wordwrapping \nfunctions. Be sure to place the plugin's \nwordwrap tag here, so that you don't\nhave to worry setting up your books' text lines \nyourself. This plugin does not implement \nwordwrapping as to not be redundant to many \nother popular and commonly used plugins, as \nwell as try to remain compatible to all of them.\n Default: %3\n\n Y\n  - There's a catch to this one: it is relative\n  to the title window position. So, 0 means it\n  will be placed directly below the title\n  window. If you wish to hide the title window\n  remember to set the \"Hide Title Bar\"\n  property to \"true\".",
+                "category": 1
+            },
+            "MenuList": {
+                "title": "Menu List",
+                "text": "Show Categories\n - This will determine if books will be listed\n below their categories in the list window. If\n set to false, categories will be hidden and\n the menu will list only books.\nDefault:  true\n\nClosed / Opened Category Symbol\n - This two parameters defines what symbols we\n will be using to show the player that a\n category is compressed or expanded. Think of\n categories like folders: when you open a\n folder in the windows explorer menu, the\n folder will appear opened. Otherwise it will\n be closed.\nDefault:\n Closed Category Symbol: +\n Opened Category Symbol: -\n\nCategory Text Format\n - This defines how the categories are shown to\n the players in the list menu. You can use text\n codes to customize it as you wish, and use\n this placeholders to set up the category entry:\n   - %1 will reference the opened/closed symbols\n   - %2 will reference the category name\n   - %3 will reference the number of books\n   available under that category\nDefault:  %1%2 (%3)\n\nBook Indent\n - This is how much to indent book names if the\n categories are shown, helping players\n distinguish books from categories and which\n books belong to which category.\nDefault: 16\n\nHide Unread Books\n - This determines if we should hide books the\n player has not found by himself in the book\n menu or not. If set to true, only books read\n while exploring the world will be listed. If\n false, all available books are shown.",
+                "category": 1
+            },
+            "MenuTitle": {
+                "title": "Menu Title",
+                "text": "This is very similar to the Detached Title Window \nparameters, but it defines how the title bar will\nbe displayed inside the book menu.\n\nEmpty Title Text\n - When the player is navigating the list of\n books, he can leave the cursor on a category\n item, which have no text. This parameters allows\n you to setup a default text to be displayed when\n there is no book selected.",
+                "category": 1
+            },
+            "MenuText": {
+                "title": "Menu Text",
+                "text": "This is very similar to the Detached Text \nWindow parameters, but it defines how the text \nwindow will be displayed inside the book menu.\n\nBook Text Format\n - This defines how the book text is shown to\n the players. You can use text codes to\n customize the window as you wish, and use this\n placeholders to set up book data:\n   - %1 will reference the book title (should\n   you wish to hide the title bar)\n   - %2 will reference the book category\n   - %3 will reference the book text\nI highly recommend using Yanfly's Message Core \nplugin, or any other that provides wordwrapping \nfunctions. Be sure to place the plugin's \nwordwrap tag here, so that you don't\nhave to worry setting up your books' text lines \nyourself. This plugin does not implement \nwordwrapping as to not be redundant to many \nother popular and commonly used plugins, as \nwell as try to remain compatible to all of them.\n\nDefault: %3\n\nEmpty Book Text\n - When the player is navigating the list of \n books, he can leave the cursor on a category\n item, which have no text. This parameters\n allows you to setup a default text to be\n displayed when there is no book selected.\n\nDefault: ",
+                "category": 1
+            },
+            "DataSources": {
+                "title": "DataSources",
+                "text": "This plugin was built to work with two main types \nof datasources: the Plugin Manager and external\nJSON files.\n\nDataSource Type\n - Use this parameters to define which datasource\n will be used. If you choose 'Plugin Manager',\n you need to enter your books in the 'Plugin\n Manager Books' parameter. If you choose the\n 'JSON File' option, you need to refine \n configurations in the 'JSON Config' parameter.\n Either way, you should use only one. So by\n choosing one you can safely ignore the other\n parameters.",
+                "category": 0,
+                "id": 3
+            },
+            "JSONConfig-I": {
+                "title": "JSON Config - I",
+                "text": "Type\n - This plugin provides two options when using\n a JSON file to load your book data: 'Dedicated\n File' and 'Localization File'.\n  * Dedicated File: You specify a dedicated\n  file with the expected structure, and the\n  plugin will read your book texts as they are\n  configured in the file.\n  * Localization File: If you're using a\n  localization plugin that reads text from\n  different files according to the language\n  selected by the player (like Iavra's\n  Localization Plugin, for example), you need\n  to specify the structure inside the files and\n  how is you placeholders configured. Then, you\n  need to point to ONE of the files. This\n  plugin will use the selected file as a guide \n  to load the placeholders as needed.\n\nFile\n - This should point to a JSON file containing\n all your books. If you 'Type' has been set to\n 'Localization File' (meaning you're using a\n Localization Plugin and different files for\n different languages), this parameter should \n point to a just one of the language files.",
+                "category": 1
+            },
+            "JSONConfig-II": {
+                "title": "JSON Config - II",
+                "text": "The JSON file must have a structure similar to\n this, whichever Type has been chosen:\n\n{\n \"library\": {\n     \"categories\": [\n         \"Category 1\",\n         \"Category 2\",\n         ...\n         \"Category N\"\n     ],\n     \"books\": {\n         \"title1\": {\n             \"title\": \"Book Title\",\n             \"text\": \"Book's content.\",\n             \"category\": 0,\n             \"id\": 0,\n              \"customBg\": \"Picture Name\",\n              \"customBgMode\": 11\n         },\n         \"title2\": {\n             ...\n         },\n         ...,\n         \"titleN\": {\n             ...\n         }\n     }\n }\n}\n\nYou can customize the object's tags as you wish \nusing the next parameters.\n\nIMPORTANT: \n  - The \"category\" tag must be a number,\n  referencing the category index in the\n  \"categories\" array.\n  - The \"id\" tag is used to control the\n  ordering of books in the list window. It must\n  be a number, but it can also be omitted and\n  the plugin will define the order according to\n  the order it reads the books from the file\n  (usually the order they're placed).\n  - Each book must have an unique key tag. This\n  tag will be used by most of the plugin\n  available commands.",
+                "category": 1
+            },
+            "JSONConfig-III": {
+                "title": "JSON Config - III",
+                "text": "Localization Escape Code\n - This defines how the plugin must create the\n localization placeholders. {key} will be\n replaced by the reference to each text, so\n that the Localization Plugin of choice can\n search for the text in the correct language.\n This parameter can be safely ignored if you're\n not using a localization plugin.\nDefault:\n #{{key}}\n\nCategory List\n - This defines the object inside the JSON file\n that contains the array of book categories. Be\n advised that the order the categories are\n placed in the array defines the order they\n will be loaded in the list menu.\nDefault:\n  library.categories\n\nRoot Context Path\n - This defines the root context inside the\n JSON File to look for the books.\nDefault:\n  library.books",
+                "category": 1
+            },
+            "JSONConfig-IV": {
+                "title": "JSON Config - IV",
+                "text": "Title Object\n - Use this parameter to customize the title\n tag of you JSON file. The title tag will be\n used to reference each book title.\nDefault:\n  title\n\nText Object\n - Use this parameter to customize the text tag\n of your JSON file. The Text tag will be used\n to reference each book text.\nDefault:\n  text\n\nCategory Object\n - Use this parameter to customize the category\n tag of your JSON file. The category tag will\n be used to reference each book category.\nDefault:\n  category\n\nId Object\n - Use this parameter to customize the Id tag\n of your JSON file. The id tag will be used to\n reference each book id.\nDefault:\n  id\n\nUndefined Category\n - This defines a default text to be displayed\n instead of the category name if the category\n could not be correctly loaded.\nDefault:\n  Unknown",
+                "category": 1
+            },
+            "PluginManagerBooks": {
+                "title": "Plugin Manager Books",
+                "text": " Category Order\n - This defines the order at which the categories\n will be listed in the list menu.\n\nBooks\n - Enter the book data directly through the\n Plugin Manager. Similarly to the JSON File\n approach, you must specify a Title, Text,\n Category and Id for each book. If you leave the\n Id the same for all books, the plugin will load\n them in the order they're placed in the plugin\n manager.\n\nIMPORTANT:\n  - Each book must have an unique name. Book\n  names will be used as keys by almost all plugin\n  available commands.\n  - Each book category must match a category\n  listed in the 'Category Order' parameter.",
+                "category": 1
+            },
+            "MiscParameters": {
+                "title": "Misc Parameters",
+                "text": "The Misc parameters are general configurations \nthat don't fit into any of other categories. \nHere you can find the following options:\nBreak Before Image\n - This defines if the plugin should \nautomatically add a line break (a blank line) \nbefore any images you insert. It's default \nvalue is false, since your book text will be \nmore human friendly if you manually include\na new line before the inline image code.\nForce Image Into Window\n - This basically tells the plugin if it is \nacceptable for an inline image to be bigger \nthan the window width. If set to true, an \nimage bigger then the window width will be \nresized to fit (using the same proportion \nfor height). If false, the image will be \nloaded into the window as is.\nReset Books Read On Load\n - This can be used to force books previously \nread to be forgotten when a saved game is \nloaded. If set to \"REMEMBER\", the books read \nby the player will be reloaded as they were \nwhen the game was saved. If set to \"RESET\", \nall books will be forgotten on game load.\nText Windows WordWrap Fix\n - This parameter should ONLY be set to true \nwhen using a wordwrap plugin. If you're not, \nleave it as 'false', otherwise you may \noverburden your GPU memory for nothing.\nThe reason why this is required, is that when \nusing wordwrap, the size of your full text is \nnot really known until it is written to screen. \nHowever, to provide scrolling we need to know \nit beforehand. To counter that, this parameter \nenables a function that \"guesses\" the text \nonscreen size to avoid the clipped text issue \nwithout stressing the GPU. That guess, though, \nis not possible for both wordwrap and \nnon-wordwrap at the same time. Thus the need to \nturn it on or off accordingly.\nNative Touch/Click Support\n - This parameter has three possible values:\n   * Disable: completely disables Touch/Click \n     support;\n   * Up/Down Arrows Only: Enables support only \n     for scrolling by clicking / touching on the \n     up/down arrows;\n   * Full Support: Enables support for scrolling \n     using the up/down arrows and by touch/click \n     and dragging up and down.\nBy default this option is set to 'Full Support', \nbut if you're using another plugin to provide \ncustom touch behavior you may stumble into \ncompatibility issues. In that case, try \ndisabling full support either total or partially.\nI cannot guarantee compatibility with plugins \nwhich customize touch inputs with Full Support \non ('Up/Down Arrows Only' should be okay though).\nInline Image Preloading\n - This parameter enables or disables inline \nimage preloading. If enabled, the plugin will \nstart loading inline images when the book is \nhighlighted in the book list, before the book \nitself is loaded. This happens to try and \nprevent text from appearing first, and the \nimages a few seconds later. This, however, can \nbe memory heavy if you have a large number of \nbooks with different inline images. Disabling \nthis option may help with performance, but may \nalso make the delay when loading images apparent.",
+                "category": 1
+            },
+            "MainMenu": {
+                "title": "Main Menu",
+                "text": "The following parameters are meant to configure\n the main menu entry:\n\nAuto Place Command\n - If enabled, this parameters creates a main\n menu entry for the Book menu automatically. \n For those using Yanfly's Main Menu Manager (or\n other plugins to control main menu entries as\n well) this parameter should be disabled. As for\n Yanfly's Main Menu Manager, you can setup the\n Book command using the following format:\n\n     Menu Name: TAA.bm.Parameters.Menu.Name\n     Menu Symbol: books\n     Menu Show: $gameSystem.isShowBookMenu()\n     Menu Enabled: $gameSystem.isBookMenuEnabled()\n     Menu Ext:\n     Menu Main Bind: this.commandBook.bind(this)\n     Menu Actor Bind:\n\nMenu Name\n - This sets up the menu name in the main menu\n window.\n\nShow Menu\n - This defines if the book menu is shown by\n default at the main menu.\n\nDefault: true\n\nEnable Menu\n - This defines if the book menu is enabled by\n default at the main menu.\n\nDefault: true",
+                "category": 0,
+                "id": 3
+            },
+            "ScriptCalls": {
+                "title": "Script Calls",
+                "text": "There are a few script calls you can use with\n this plugin to test a few \nconditions or return a few statistics.\n$gameSystem.isShowBookMenu()\n - Test if the book menu should be shown at the\n main menu.\n$gameSystem.isBookMenuEnabled()\n - Test if the book menu should be enabled at\n the main menu.\n$gameSystem.isBookCategoriesVisible()\n - Test if the books categories are visible in\n the list window.\n$gameSystem.isUnreadBooksHidden()\n - Check if books not found by the player are\n shown at the list menu.\n$gameSystem.getTotalBooks()\n - Return the total number of books in the game.\n$gameSystem.getTotalBooksRead()\n - Return the number of books the player has\n found.\n$gameSystem.getTotalBooksFromCategory(category)\n - Replace \"category\" with the category name,\n regardless of the datasource type selected.\n This will return the total number of books\n under this category. Remove blank spaces in \n the category name, if any.\nExample:\n $gameSystem.getTotalBooksFromCategory(\"History\");\n$gameSystem.\n getTotalBooksReadFromCategory(category)\n - Replace \"category\" with the category name,\n regardless of the datasource type selected.\n This will return the total number of books\n from the specified category that has already\n been read by the player. Remove blank spaces \n in the category name, if any.\nExample: $gameSystem.\n getTotalBooksReadFromCategory(\"History\");\n$gameSystem.isBookRead(bookKey)\n - \"bookKey\" should be replaced by the book\n tag, if you're using a JSON file as your\n datasource, or the book title (minus blank \n spaces if you're using Plugin Manager. This \n will return true if the player has already \n read the book, or false if he didn't.\nExamples:\n $gameSystem.isBookRead(\"bookJsonTag\");\n $gameSystem.isBookRead(\"PluginManagerTitle\");\n$gameSystem.createExportDummy()\n - Creates a dummy map with 1 tile and an event \nwith commands to show every inline image called \nfrom within books. This is a useful tool to run \njust before exporting your game. This dummy map \nprevents inline images to be deleted when \nselecting the option to exclude unused files. \nThe command will always create a new map with a \nhigh index (last map id + 1). To see the dummy \nmap you'll need to close and reopen the editor.",
+                "category": 2
+            },
+            "SceneCommands": {
+                "title": "Scene Commands",
+                "text": "OpenBookMenu\n - Triggers the book menu to be displayed.\nReadBook key <true|false>\n - Replace key with the book tag, if using a\nJSON file as datasource, or the  book title if\nusing Plugin Manager. If the key contains\nblank spaces between words, you need to remove \nit in the plugin command call. \nThis will mark the book as read (if it isn't\nalready) and display the detached book window \nwith the book contents.\nOptionally, you can add a second argument that \ntells if the book will be marked as read or not \n(true or false). If the argument is left blank, \nthe book is marked as read.\nExamples:\n ReadBook bookJsonTag\n ReadBook \"PluginManagerTitle\"\n ReadBook bookJsonTag false",
+                "category": 2
+            },
+            "LibraryCommands": {
+                "title": "Library Commands",
+                "text": "LibraryData Menu Hide\nLibraryData Menu Show\n - Use this commands to hide / show the book\n menu from the main menu list.\n\nLibraryData Menu Enable\nLibraryData Menu Disable\n - Use this commands to enable / disable the\n book menu at the main menu list.\n\nLibraryData Learn Book key\nLibraryData Forget Book key\n - Use this commands to make the player learn /\n forget books without opening the detached book\n window. Replace 'key' with the book tag, if\n using a JSON File as datasource, or the book\n title if using the Plugin Manager. If the key\n contains blank spaces between words surround\n it with double quotes.\n\nLibraryData Learn Books key1 key2 key3 ... keyN\nLibraryData Forget Books key1 key2 key3 ... keyN\n - Similar to the previous command, but this\n can be used to make the player learn / forget\n many books at once.\n\nLibraryData Learn Category categoryName\nLibraryData Forget Category categoryName\n - Use this commands to make the player learn /\n forget all books from a specific category.\n Replace 'categoryName' with the category name\n (use double quotes if it contains blank spaces)\n\nLibraryData ShowCategories on\nLibraryData ShowCategories off\n - Use this to show / hide categories in the\n list window menu.\n\nLibraryData UnreadBooks hide\nLibraryData UnreadBooks show\n - Use this to hide / show books not read by\n the player in the book list window.\n\nLibraryData TitleBar hide\nLibraryData TitleBar show\n - Use this to hide / show the title bar on the detached\n book window.",
+                "category": 2
+            },
+            "WhatIsIt?": {
+                "title": "What Is It?",
+                "text": "\\C[1]Lorem Ipsum\\C[0] is simply dummy text of the \nprinting and typesetting industry. Lorem Ipsum \nhas been the industry's standard dummy text ever \nsince the 1500s, when an unknown printer took a \ngalley of type and scrambled it to make a type \nspecimen book. It has survived not only five \ncenturies, but also the leap into electronic \ntypesetting, remaining essentially unchanged. It \nwas popularised in the 1960s with the release of \nLetraset sheets containing Lorem Ipsum passages, \nand more recently with desktop publishing \nsoftware like Aldus PageMaker including versions \nof Lorem Ipsum.",
+                "category": 3
+            },
+            "FromWhere?": {
+                "title": "From Where?",
+                "text": "Contrary to popular belief, Lorem Ipsum is not \nsimply random text. It has roots in a piece of \nclassical Latin literature from 45 BC, making it \nover 2000 years old. Richard McClintock, a Latin \nprofessor at Hampden-Sydney College in Virginia, \nlooked up one of the more obscure Latin words, \nconsectetur, from a Lorem Ipsum passage, and \ngoing through the cites of the word in classical \nliterature, discovered the undoubtable source. \nLorem Ipsum comes from sections 1.10.32 and \n1.10.33 of \"de Finibus Bonorum et Malorum\" (The \nExtremes of Good and Evil) by Cicero, written in \n45 BC. This book is a treatise on the theory of \nethics, very popular during the Renaissance. The \nfirst line of Lorem Ipsum, \"Lorem ipsum dolor \nsit amet..\", comes from a line in section \n1.10.32.\n\nThe standard chunk of Lorem Ipsum \nused since the 1500s is reproduced below for \nthose interested. Sections 1.10.32 and 1.10.33 \nfrom \"de Finibus Bonorum et Malorum\" by Cicero \nare also reproduced in their exact original form, \naccompanied by English versions from the 1914 \ntranslation by H. Rackham.",
+                "category": 3
+            },
+            "WhyUseIt?": {
+                "title": "Why Use It?",
+                "text": "It is a long established fact that a reader will \nbe distracted by the readable content of a page \nwhen looking at its layout. The point of using \nLorem Ipsum is that it has a more-or-less normal \ndistribution of letters, as opposed to using \n'Content here, content here', making it look like \nreadable English. Many desktop publishing \npackages and web page editors now use Lorem Ipsum \nas their default model text, and a search for \n'lorem ipsum' will uncover many web sites still \nin their infancy. Various versions have evolved \nover the years, sometimes by accident, sometimes \non purpose (injected humour and the like).",
+                "category": 3
+            },
+            "WhereCanIGetIt?": {
+                "title": "Where Can I Get it?",
+                "text": "There are many variations of passages of Lorem \nIpsum available, but the majority have suffered \nalteration in some form, by injected humour, or \nrandomised words which don't look even slightly \nbelievable. If you are going to use a passage of \nLorem Ipsum, you need to be sure there isn't \nanything embarrassing hidden in the middle of \ntext. All the Lorem Ipsum generators on the \nInternet tend to repeat predefined chunks as \nnecessary, making this the first true generator \non the Internet. It uses a dictionary of over 200 \nLatin words, combined with a handful of model \nsentence structures, to generate Lorem Ipsum \nwhich looks reasonable. The generated Lorem Ipsum \nis therefore always free from repetition, \ninjected humour, or non-characteristic words \netc.\n\n\\C[1]Reference:\\C[8] https://www.lipsum.com/\\C[0]",
+                "category": 3
+            },
+            "Sample": {
+                "title": "Sample",
+                "text": "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Duis vitae justo tincidunt, \nvenenatis nisi et, sollicitudin neque. Morbi \nnec tortor lacus. Etiam ornare, nunc nec \nfringilla tempus, est nunc congue est, ut \nmaximus ipsum nibh interdum ex. Nunc hendrerit \nnibh eget nibh suscipit lacinia. Nullam iaculis \nmauris tortor, sit amet semper turpis consequat \nnon. Nam id suscipit lacus. Donec tempus \niaculis placerat.\n\nEtiam interdum facilisis est id aliquam. \nPhasellus at quam ornare, ornare metus sit \namet, euismod turpis. Quisque condimentum sem \nquis pellentesque aliquam. Proin auctor \nhendrerit iaculis. Phasellus vitae magna \ncongue, aliquet turpis a, faucibus diam. Proin \npharetra ultricies gravida. Ut fringilla, ipsum \nut pretium porttitor, leo est congue lectus, \nvitae finibus elit neque non massa. Vivamus \nfaucibus, orci eu viverra mattis, dui velit \nvulputate nisl, quis consequat dolor odio ut \norci. Curabitur erat dolor, posuere sed luctus \nvitae, dapibus ac orci. Vestibulum quis \nmalesuada est. Maecenas semper posuere \nconsequat. Maecenas euismod accumsan ultricies. \nNullam turpis erat, scelerisque vel dapibus in, \ngravida sit amet ipsum. Donec varius neque ac \nnunc fermentum ultricies. Ut quis gravida elit.\n\nCras imperdiet mi sit amet ligula pellentesque \ncommodo. Aliquam sagittis, diam ac maximus \naliquam, ligula massa tristique quam, vitae \ncondimentum felis purus sed lacus. Vivamus \niaculis, ex quis bibendum volutpat, turpis \nnulla facilisis libero, sed posuere massa \nmauris at massa. Praesent molestie pulvinar \ndolor quis tristique. Sed faucibus odio euismod \nest pellentesque scelerisque. Etiam bibendum, \nerat non ultricies vestibulum, dolor turpis \nconsectetur dolor, eu pulvinar felis ipsum at \ndui. Mauris id semper justo, eu semper nisi. In \nimperdiet non libero in posuere. Nam pulvinar \nsagittis orci a condimentum. Phasellus \nhendrerit, dui a interdum dignissim, ante purus \nmolestie erat, at tincidunt metus elit et mi. \nCurabitur eget turpis tortor. Fusce sed viverra \nelit, nec porttitor dui. Etiam facilisis \ntincidunt erat a aliquam. Ut vel consequat \nvelit, sed pulvinar turpis. Morbi at semper \npurus. Maecenas ac neque sem.",
+                "category": 3
+            },
+            "Version1.0.0": {
+                "title": "Version 1.0.0",
+                "text": " - First Release!",
+                "category": 4
+            },
+            "Version1.0.1": {
+                "title": "Version 1.0.1",
+                "text": " - Fixed mouse wheel scrolling by including a\ncustomization to TouchInput._onMouseMove.",
+                "category": 4
+            },
+            "Version1.1.0": {
+                "title": "Version 1.1.0",
+                "text": " - Reorganized all aliases inside an object, to\nmake them easier to track down\n - Included the possibility to customize scene\nbackgrounds with images. The Detached Scene and\nMenu Scene have different configurations, so that\nthey can have different backgrounds if the dev\nwishes",
+                "category": 4
+            },
+            "Version1.2.0": {
+                "title": "Version 1.2.0",
+                "text": " - Included a new feature allowing books to have\ncustom background images that override the \ndefault ones. It comes with options to use the\ncustom images on the detached scene only, menu\nscene only, or both. The image can also be set\nto cover only the text window or title + text \nwindows",
+                "category": 4
+            },
+            "Version1.3.0": {
+                "title": "Version 1.3.0",
+                "text": " - Fixed a bug caused by the custom background\nchange of the previous version that could cause\nthe game to crash when opening a book with no\ncustom background.\n - Reworked the Window_BookText prototype to\nallow inline images to be included along with a\nbook text.",
+                "category": 4
+            },
+            "Version1.3.1": {
+                "title": "Version 1.3.1",
+                "text": " - Added a custom log function to help me debug\nfuture issues.\n - Fixed compatibility with \nOlivia_StateTooltipDisplay",
+                "category": 4
+            },
+            "Version1.3.2": {
+                "title": "Version 1.3.2",
+                "text": " - Fixed compatibility with MOG_MenuCursos (and\nprobably with most plugins that creates a new \nlayer over the scene as long as it stays over the\nWindowLayer)",
+                "category": 4
+            },
+            "Version1.3.3": {
+                "title": "Version 1.3.3",
+                "titleColor": 1,
+                "text": " - Fixed bug that caused odd window behavior when\ntwo or more books in a row had custom backgrounds\n - Option added to set a custom color for book \ntitles only in the title section. When in the\nbook menu, it will appear with default color in \nthe list section while using the custom color in\nthe title section. Use escape codes if you wish\nto use the same color on both sections\n - Included a small fix so that the first item on\nthe list is automatically selected when the Book \nMenu is loaded\n - Fixed an issue when using inline images along\nwith wordwrap",
+                "category": 4
+            },
+            "Version1.3.4": {
+                "title": "Version 1.3.4",
+                "text": "%in_img(\"alphabet-2010751_960_720\", 10, 10)dded new feature to allow trailing \ninline images into book texts\n%in_img(\"alphabet-2010746_960_720\", 10, 10)ixed bug with test padding not being \napplied to book text%in_img(\"alphabet-2010746_960_720\", 10, 10)ixed an issue when using RS_MessageAlign \nthat caused the first line to not be aligned\ncorrectly",
+                "category": 4
+            },
+            "Version1.3.5": {
+                "title": "Version 1.3.5",
+                "text": " - Included parameters that an be used to reset \nor keep book list on game load. If set to reset, \nNew books created into the selected datasource \nwill be loaded into the game, otherwise it will \nkeep the list of books previously loaded by that \nsave. Similarly, there's another new parameter \nthat allows you to reset or remember books read \non game load. Which means you can set the plugin \nto make it so all books listed on the book menu \nare forgotten, or remembered on game load.\n - Added script calls and plugin commands to \nreset the whole library, only the book list, and \nonly books read (forget all books found);",
+                "category": 4
+            },
+            "Version1.3.6": {
+                "title": "Version 1.3.6",
+                "text": "- Added the 'Load Closed Categories' parameter \nto allow categories to be automatically closed \nwhen loading the plugin menu. If set to NO, the \nplugin will retain previous behavior of always \nshowing every category open",
+                "category": 4
+            },
+            "Version1.3.7": {
+                "title": "Version 1.3.7",
+                "text": "- Added a handler to allow closing the detached window when pressing 'ok' as well as 'cancel';\n- Fixed the black text window issue on large books with lots of line breaks;",
+                "category": 4
+            },
+            "Version1.4.0": {
+                "title": "Version 1.4.0",
+                "text": "- Fixed arrows not showing in the text window \nwhen scrolling;\n- Fixed clipping text on text window when using \nwordwrapping plugins (enable 'Text Windows \nWordWrap Fix' to activate it);\n- Fixed Auto Place, Enable and Show menu \nparameters;\n- Added native plugin support to touch/click \nand drag scrolling, and scrolling by clicking/\ntouching the up/down arrows. Touch/click support \ncan also be disabled (total or partially) using \nthe 'Native Touch/Click Support' parameter",
+                "category": 4
+            },
+            "Version1.4.1": {
+                "title": "Version 1.4.1",
+                "text": " - Added a parameter to the ReadBook command, \nto allow a book to be read in the detached \nwindow without marking it as read. Simply \ncall the plugin command as follows: \n ReadBook <BookName> false\n - Added a fix to prevent errors when loading \nsave files created before the plugin was enabled \nin the plugin manager;\n - Changed how save files are handled, so that \nonly books read are stored (not the whole \nlibrary). This will make save files lighter. \nAs a result, the \"Reset Book List On Load\" \nparameter was removed (book list will always be\nreset on load, as only books read are saved);\n - Added a \"@require 1\" to each image background \nparameter, so that the editor will know to keep \nthem when exporting with the exclude unused \noptions enabled. Thanks to Solar_Flare for \npointing it out;\n - Added the script call \n$gameSystem.createExportDummy() to create a dummy\nevent calling a show picture for each inline image. \nThis is a tool to be used just before exporting \nyour game, so that \"exclude unused files\" won't \ndelete inline images;\n - Changed the function used to load the library \nfrom DataManager.createGameObjects to \nDataManager.loadDatabase;",
+                "category": 4
+            },
+            "Version1.4.2": {
+                "title": "Version 1.4.2",
+                "text": " - Added the parameter 'Load Before Title', \nallowing to hold game load until all books \nare loaded to memory, or running it \nasynchronously (as it was with previous versions)\n - Fixed an issue with book counting when Hide \nUnread Books is disabled",
+                "category": 4
+            },
+            "Version1.5.0": {
+                "title": "Version 1.5.0",
+                "titleColor": 0,
+                "text": " - Added MZ compatibility\n - Reworked a few functions, enhancing \nperformance a bit\n - Discontinued the parameter \"Text Windows \nWordWrap Fix\", as it is no longer needed.\n - Added support to home/end keys into the book \ntext window, allowing quick navigation to the \nstart or end of your book text.\n - Added some steps to validate runtime images \n(inline images and custom backgrounds) exists \nbefore trying to load them. This way the game \nwon't crash if it tries to load an image that is \nnot available in the filesystem.\n - Added a plugin command to force inline image \npreloading of a specific book.\n - Revised and enhanced detached scene book \nperformance when inline images are present.\n - Fixed an issue with hide categories plugin \ncommand\n - Added a parameter to allow a custom folder \nfor inline images, making it easier to copy them \nto an exported project (since default export \nwith exclude unused files don't consider such \nfiles).", 
+                "category": 4
+            },
+            "Version1.5.1": {
+                "title": "Version 1.5.1",
+                "titleColor": 0,
+                "text": " - Fixed an issue with window layers on MZ, which \ncould cause incompatibility with other plugins;\n - Fixed a bug with the plugin command to learn \nall books from a category when books didn't have \nsequential ids (like having books with ids 1, 4, \n10 instead of 1, 2 and 3). It would mess with \ncategory book count in the menu scene", 
+                "category": 4
+            },
+            "Version1.5.2": {
+                "title": "Version 1.5.2",
+                "titleColor": 0,
+                "text": " - Fixed a bug that caused a Full Background \nimage to have right and bottom borders cut off \nwith MZ;\n - Fixed a bug that caused any combinations of \nFull Background / Default Map Print with menu \nbackground images to fail (only the full ]\nbackground would appear);\n - Fixed a bug that could cause crashes with \ndeployed projects (failure to load image files);\n - Added a new background setting for both \nscenes: Map Print + Full Background. This allows \nthe use of transparencies with the full \nbackground image without having borders around \nit;", 
+                "category": 4
+            },
+            "Version1.6.0": {
+                "title": "Version 1.6.0",
+                "titleColor": 0,
+                "textArray": [
+                    "- Changed method that checks if image file exists \nbefore trying to load so it can work properly on \nweb and mobile deployments;\n\n- Fixed alignment of item names in the book menu \nlist;",
+                    "- Added a new parameter to enable / disable \nchecking if files exists before loading;",
+                    "- Added a new feature to allow book text to \nchange with plugin commands. New plugin \nparameters were added to allow including a list \nof texts and a list of visible texts. All changes \nwere implemented to have backwards compatibility;",
+                    "- Added a \"new\" indicator for books learned / \nchanged and not yet read in the book menu. This \nmarking can be done with a static text, an icon \nor a picture. All settings for this feature are \nlocated under the Menu List Window parameter;"
+                ], 
+                "category": 4
+            },
+            "Version1.6.1": {
+                "title": "Version 1.6.1",
+                "titleColor": 0,
+                "text": "- Fixed a bug that could cause a custom window \nskin to not be loaded correctly the first time \na scene is activated;\n- Changed the code to prevent crashes when \nbackground image parameters are not set correctly;", 
+                "category": 4
+            },
+            "Version1.6.2": {
+                "title": "Version 1.6.2",
+                "titleColor": 0,
+                "text": "- Fixed a compatibility bug with CGMV_Toast;", 
+                "category": 4
+            },
+            "Version1.6.3": {
+                "title": "Version 1.6.3",
+                "titleColor": 0,
+                "text": "- Fixed a bug that would prevent correct \npositioning of the text window in the detached \nscene when it is not placed directly below the \ntitle window;", 
+                "category": 4
+            }
+        }
+    }
+}
